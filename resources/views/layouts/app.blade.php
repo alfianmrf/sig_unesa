@@ -80,7 +80,7 @@
                         areaKampus.features.push(
                             {
                                 "type": "Feature",
-                                "geometry": value['area'],
+                                "geometry": JSON.parse(value['area']),
                                 "properties": {
                                     "popupContent": "This is a free bus line that will take you across downtown.",
                                     "wilayah": value['nama_wilayah']
@@ -99,7 +99,7 @@
                         areaFakultas.features.push(
                             {
                                 "type": "Feature",
-                                "geometry": value['area'],
+                                "geometry": JSON.parse(value['area']),
                                 "properties": {
                                     "popupContent": "This is a free bus line that will take you across downtown.",
                                     "idFakultas": value['id_fakultas'],
@@ -119,7 +119,7 @@
                         areaJurusan.features.push(
                             {
                                 "type": "Feature",
-                                "geometry": value['area'],
+                                "geometry": JSON.parse(value['area']),
                                 "properties": {
                                     "popupContent": "This is a free bus line that will take you across downtown.",
                                     "idFakultas": value['id_fakultas'],
@@ -139,7 +139,7 @@
                         areaGedung.features.push(
                             {
                                 "type": "Feature",
-                                "geometry": value['area'],
+                                "geometry": JSON.parse(value['area']),
                                 "properties": {
                                     "popupContent": "This is a free bus line that will take you across downtown.",
                                     "namaGedung": value['nama_gedung']
@@ -159,7 +159,7 @@
                         pointProdi.features.push(
                             {
                                 "type": "Feature",
-                                "geometry": value['pt'],
+                                "geometry": JSON.parse(value['area']),
                                 "properties": {
                                     "popupContent": "This is a free bus line that will take you across downtown.",
                                     "namaProdi": value['nama_prodi']
