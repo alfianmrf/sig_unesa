@@ -17,7 +17,7 @@ class MapController extends Controller
         return DB::raw('st_asgeojson(latlng) as area');
     }
 
-    public function polygonTextGedung()
+    public static function polygonTextGedung()
     {
         $data = Gedung::select(DB::raw('AsText(latlng) as polyText'))->get();
         return $data;
@@ -26,31 +26,43 @@ class MapController extends Controller
     public function resultKampus()
     {
         $idKampus = Kampus::where('nama_kampus', 'Universitas Negeri Surabaya')->first();
-        $data =  WilayahKampus::select('*', $this->stAsGeoJsonLatLng())->where('id_kampus', $idKampus->id)->get();
+        $data = WilayahKampus::select('*', $this->stAsGeoJsonLatLng())->where('id_kampus', $idKampus->id)->get();
         return $data;
     }
 
     public function resultFakultas()
     {
-        $data =  SebaranFakultas::select('*', $this->stAsGeoJsonLatLng())->get();
+        $data = SebaranFakultas::select('*', $this->stAsGeoJsonLatLng())->get();
         return $data;
     }
 
     public function resultJurusan()
     {
-        $data =  Jurusan::select('*', $this->stAsGeoJsonLatLng())->get();
+        $data = Jurusan::select('*', $this->stAsGeoJsonLatLng())->get();
         return $data;
     }
 
     public function resultGedung()
     {
-        $data =  Gedung::select('*', $this->stAsGeoJsonLatLng())->get();
+        $data = Gedung::select('*', $this->stAsGeoJsonLatLng())->get();
         return $data;
     }
 
     public function resultProdi()
     {
-        $data =  Prodi::select('*', $this->stAsGeoJsonLatLng())->get();
+        $data = Prodi::select('*', $this->stAsGeoJsonLatLng())->get();
+        return $data;
+    }
+
+    public function centerGedung()
+    {
+        $data = array();
+        foreach($this->polygonTextGedung() as $items){
+            $pointText = $items['polyText'];
+            $center = collect(DB::select('SELECT ST_AsText(ST_Centroid(ST_GeomFromText("'.$pointText.'"))) AS center'))->first();
+            $centerPointCoordinate = collect(DB::select('SELECT ST_X(GeomFromText("'.$center->center.'")) as xValue, ST_Y(GeomFromText("'.$center->center.'")) as yValue'))->first();
+            array_push($data, $centerPointCoordinate);
+        }
         return $data;
     }
 }

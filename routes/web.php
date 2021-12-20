@@ -19,12 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/polygonTextGedung', [MapController::class, 'polygonTextGedung'])->name('polygonTextGedung');
 Route::get('/resultKampus', [MapController::class, 'resultKampus'])->name('resultKampus');
 Route::get('/resultFakultas', [MapController::class, 'resultFakultas'])->name('resultFakultas');
 Route::get('/resultJurusan', [MapController::class, 'resultJurusan'])->name('resultJurusan');
 Route::get('/resultGedung', [MapController::class, 'resultGedung'])->name('resultGedung');
 Route::get('/resultProdi', [MapController::class, 'resultProdi'])->name('resultProdi');
+Route::get('/centerGedung', [MapController::class, 'centerGedung'])->name('centerGedung');
 
 Auth::routes();
 

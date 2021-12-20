@@ -73,6 +73,10 @@
                 "features": [],
             };
 
+            var centerGedung = {
+                "point": []
+            };
+
             $.get({
                 url: "{{ route('resultKampus') }}",
                 success: function(data) {
@@ -170,7 +174,19 @@
                     })
                 }
             });
-            
+
+            $.get({
+                url: "{{ route('centerGedung') }}",
+                success: function(data) {
+                    $.each(data, function(index, value) {
+                        centerGedung.point.push(
+                            [
+                                value['yValue'], value['xValue']
+                            ]
+                        )
+                    })
+                }
+            });
         </script>
         <script src="{{ asset('argon') }}/js/script.js"></script>
     </body>
