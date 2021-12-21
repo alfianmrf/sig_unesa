@@ -1,5 +1,5 @@
 var map;
-function buildMap(){
+function buildMap(location=null){
     setTimeout(
         function() 
         {
@@ -18,11 +18,20 @@ function buildMap(){
             var streets = L.tileLayer(mbUrl, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
             var satellite = L.tileLayer(mbUrl, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
             
-            map = L.map('map', {
-                center: [-7.30950 , 112.69711],
-                zoom: 15,
-                layers: [streets,kampus,fakultas,jurusan,gedung,prodi] // ini menu yang tampil pertama kali
-            });
+            if(location == null){
+                map = L.map('map', {
+                    center: [-7.30950 , 112.69711],
+                    zoom: 15,
+                    layers: [streets,kampus,fakultas,jurusan,gedung,prodi] // ini menu yang tampil pertama kali
+                });
+            }
+            else{
+                map = L.map('map', {
+                    center: location,
+                    zoom: 17,
+                    layers: [streets,kampus,fakultas,jurusan,gedung,prodi] // ini menu yang tampil pertama kali
+                });
+            }
             
             var pointIcon = L.Icon.extend({
                 options: {

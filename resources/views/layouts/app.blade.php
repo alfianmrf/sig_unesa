@@ -207,8 +207,6 @@
                                 }
                             )
                         })
-                        map.remove();
-                        buildMap();
                     }
                 });
 
@@ -226,6 +224,8 @@
                                 ]
                             )
                         })
+                        map.remove();
+                        buildMap(centerGedung.point[0]);
                     }
                 });
 
@@ -289,8 +289,6 @@
                                 }
                             )
                         })
-                        map.remove();
-                        buildMap();
                     }
                 });
 
@@ -308,6 +306,8 @@
                                 ]
                             )
                         })
+                        map.remove();
+                        buildMap(centerGedung.point[0]);
                     }
                 });
 
@@ -390,8 +390,6 @@
                                 }
                             )
                         })
-                        map.remove();
-                        buildMap();
                     }
                 });
 
@@ -409,6 +407,8 @@
                                 ]
                             )
                         })
+                        map.remove();
+                        buildMap(centerGedung.point[0]);
                     }
                 });
 
@@ -607,8 +607,6 @@
                                 }
                             )
                         })
-                        map.remove();
-                        buildMap();
                     }
                 });
 
@@ -626,6 +624,8 @@
                                 ]
                             )
                         })
+                        map.remove();
+                        buildMap(centerGedung.point[0]);
                     }
                 });
             }
