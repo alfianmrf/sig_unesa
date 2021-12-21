@@ -177,38 +177,6 @@
                         })
                     }
                 });
-
-                $.get({
-                    url: "{{ route('resultProdi') }}",
-                    async: "false",
-                    success: function(data) {
-                        $.each(data, function(index, value) {
-                            pointProdi.features.push(
-                                {
-                                    "type": "Feature",
-                                    "geometry": JSON.parse(value['area']),
-                                    "properties": {
-                                        "namaProdi": value['nama_prodi']
-                                    },
-                                    "id": value['id']
-                                }
-                            )
-                        })
-                    }
-                });
-
-                $.get({
-                    url: "{{ route('centerGedung') }}",
-                    success: function(data) {
-                        $.each(data, function(index, value) {
-                            centerGedung.point.push(
-                                [
-                                    value['yValue'], value['xValue']
-                                ]
-                            )
-                        })
-                    }
-                });
             }
 
             reset();
@@ -243,6 +211,23 @@
                         buildMap();
                     }
                 });
+
+                $.post({
+                    url: "{{ route('centerKampus') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            centerGedung.point.push(
+                                [
+                                    value['yValue'], value['xValue']
+                                ]
+                            )
+                        })
+                    }
+                });
             }
 
             function filterFakultas(id){
@@ -272,6 +257,23 @@
                         buildMap();
                     }
                 });
+
+                $.post({
+                    url: "{{ route('centerFakultas') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            centerGedung.point.push(
+                                [
+                                    value['yValue'], value['xValue']
+                                ]
+                            )
+                        })
+                    }
+                });
             }
 
             function filterJurusan(id){
@@ -299,6 +301,23 @@
                         })
                         map.remove();
                         buildMap();
+                    }
+                });
+
+                $.post({
+                    url: "{{ route('centerJurusan') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            centerGedung.point.push(
+                                [
+                                    value['yValue'], value['xValue']
+                                ]
+                            )
+                        })
                     }
                 });
             }
@@ -355,6 +374,23 @@
                         })
                         map.remove();
                         buildMap();
+                    }
+                });
+
+                $.post({
+                    url: "{{ route('centerGedung') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            centerGedung.point.push(
+                                [
+                                    value['yValue'], value['xValue']
+                                ]
+                            )
+                        })
                     }
                 });
             }

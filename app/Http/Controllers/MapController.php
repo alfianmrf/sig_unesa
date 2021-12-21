@@ -33,9 +33,27 @@ class MapController extends Controller
         return DB::raw('st_asgeojson(latlng) as area');
     }
 
-    public static function polygonTextGedung()
+    public static function polygonTextGedung($id)
     {
-        $data = Gedung::select(DB::raw('AsText(latlng) as polyText'))->get();
+        $data = Gedung::select(DB::raw('AsText(latlng) as polyText'))->where('id', $id)->get();
+        return $data;
+    }
+
+    public static function polygonTextKampus($id)
+    {
+        $data = WilayahKampus::select(DB::raw('AsText(latlng) as polyText'))->where('id', $id)->get();
+        return $data;
+    }
+
+    public static function polygonTextFakultas($id)
+    {
+        $data = SebaranFakultas::select(DB::raw('AsText(latlng) as polyText'))->where('id', $id)->get();
+        return $data;
+    }
+
+    public static function polygonTextJurusan($id)
+    {
+        $data = Jurusan::select(DB::raw('AsText(latlng) as polyText'))->where('id', $id)->get();
         return $data;
     }
 
@@ -101,10 +119,46 @@ class MapController extends Controller
         return $data;
     }
 
-    public function centerGedung()
+    public function centerGedung(Request $request)
     {
         $data = array();
-        foreach($this->polygonTextGedung() as $items){
+        foreach($this->polygonTextGedung($request->id) as $items){
+            $pointText = $items['polyText'];
+            $center = collect(DB::select('SELECT ST_AsText(ST_Centroid(ST_GeomFromText("'.$pointText.'"))) AS center'))->first();
+            $centerPointCoordinate = collect(DB::select('SELECT ST_X(GeomFromText("'.$center->center.'")) as xValue, ST_Y(GeomFromText("'.$center->center.'")) as yValue'))->first();
+            array_push($data, $centerPointCoordinate);
+        }
+        return $data;
+    }
+
+    public function centerKampus(Request $request)
+    {
+        $data = array();
+        foreach($this->polygonTextKampus($request->id) as $items){
+            $pointText = $items['polyText'];
+            $center = collect(DB::select('SELECT ST_AsText(ST_Centroid(ST_GeomFromText("'.$pointText.'"))) AS center'))->first();
+            $centerPointCoordinate = collect(DB::select('SELECT ST_X(GeomFromText("'.$center->center.'")) as xValue, ST_Y(GeomFromText("'.$center->center.'")) as yValue'))->first();
+            array_push($data, $centerPointCoordinate);
+        }
+        return $data;
+    }
+
+    public function centerFakultas(Request $request)
+    {
+        $data = array();
+        foreach($this->polygonTextFakultas($request->id) as $items){
+            $pointText = $items['polyText'];
+            $center = collect(DB::select('SELECT ST_AsText(ST_Centroid(ST_GeomFromText("'.$pointText.'"))) AS center'))->first();
+            $centerPointCoordinate = collect(DB::select('SELECT ST_X(GeomFromText("'.$center->center.'")) as xValue, ST_Y(GeomFromText("'.$center->center.'")) as yValue'))->first();
+            array_push($data, $centerPointCoordinate);
+        }
+        return $data;
+    }
+
+    public function centerJurusan(Request $request)
+    {
+        $data = array();
+        foreach($this->polygonTextJurusan($request->id) as $items){
             $pointText = $items['polyText'];
             $center = collect(DB::select('SELECT ST_AsText(ST_Centroid(ST_GeomFromText("'.$pointText.'"))) AS center'))->first();
             $centerPointCoordinate = collect(DB::select('SELECT ST_X(GeomFromText("'.$center->center.'")) as xValue, ST_Y(GeomFromText("'.$center->center.'")) as yValue'))->first();

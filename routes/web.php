@@ -27,4 +27,7 @@ Route::get('/resultGedung', [MapController::class, 'resultGedung'])->name('resul
 Route::post('/resultGedungFilter', [MapController::class, 'resultGedungFilter'])->name('resultGedungFilter');
 Route::get('/resultProdi', [MapController::class, 'resultProdi'])->name('resultProdi');
 Route::post('/resultProdiFilter', [MapController::class, 'resultProdiFilter'])->name('resultProdiFilter');
-Route::get('/centerGedung', [MapController::class, 'centerGedung'])->name('centerGedung');
+Route::post('/centerGedung', [MapController::class, 'centerGedung'])->name('centerGedung');
+Route::post('/centerKampus', [MapController::class, 'centerKampus'])->name('centerKampus');
+Route::post('/centerFakultas', [MapController::class, 'centerFakultas'])->name('centerFakultas');
+Route::post('/centerJurusan', [MapController::class, 'centerJurusan'])->name('centerJurusan');
