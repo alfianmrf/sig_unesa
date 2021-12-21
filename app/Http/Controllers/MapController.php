@@ -46,15 +46,22 @@ class MapController extends Controller
         return $data;
     }
 
+    public function resultKampusFilter(Request $request)
+    {
+        $idKampus = Kampus::where('nama_kampus', 'Universitas Negeri Surabaya')->first();
+        $data = WilayahKampus::select('*', $this->stAsGeoJsonLatLng())->where('id_kampus', $idKampus->id)->where('id', $request->id)->get();
+        return $data;
+    }
+
     public function resultFakultas()
     {
         $data = SebaranFakultas::select('*', $this->stAsGeoJsonLatLng())->get();
         return $data;
     }
 
-    public function resultFakultass()
+    public function resultFakultasFilter(Request $request)
     {
-        $data = SebaranFakultas::select('*', $this->stAsGeoJsonLatLng())->where('id', 2)->get();
+        $data = SebaranFakultas::select('*', $this->stAsGeoJsonLatLng())->where('id', $request->id)->get();
         return $data;
     }
 
@@ -64,15 +71,33 @@ class MapController extends Controller
         return $data;
     }
 
+    public function resultJurusanFilter(Request $request)
+    {
+        $data = Jurusan::select('*', $this->stAsGeoJsonLatLng())->where('id', $request->id)->get();
+        return $data;
+    }
+
     public function resultGedung()
     {
         $data = Gedung::select('*', $this->stAsGeoJsonLatLng())->get();
         return $data;
     }
 
+    public function resultGedungFilter(Request $request)
+    {
+        $data = Gedung::select('*', $this->stAsGeoJsonLatLng())->where('id', $request->id)->get();
+        return $data;
+    }
+
     public function resultProdi()
     {
         $data = Prodi::select('*', $this->stAsGeoJsonLatLng())->get();
+        return $data;
+    }
+
+    public function resultProdiFilter(Request $request)
+    {
+        $data = Prodi::select('*', $this->stAsGeoJsonLatLng())->where('id', $request->id)->get();
         return $data;
     }
 

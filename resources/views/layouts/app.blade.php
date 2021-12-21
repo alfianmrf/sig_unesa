@@ -30,9 +30,7 @@
             @yield('content')
         </div>
 
-        @guest()
-            @include('layouts.footers.guest')
-        @endguest
+        @include('layouts.footers.nav')
 
         <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -72,123 +70,190 @@
                 "point": []
             };
 
-            $.get({
-                url: "{{ route('resultKampus') }}",
-                success: function(data) {
-                    $.each(data, function(index, value) {
-                        areaKampus.features.push(
-                            {
-                                "type": "Feature",
-                                "geometry": JSON.parse(value['area']),
-                                "properties": {
-                                    "wilayah": value['nama_wilayah']
-                                },
-                                "id": value['id']
-                            }
-                        )
-                    })
-                }
-            });
+            function resetArea(){
+                areaKampus = {
+                    "type": "FeatureCollection",
+                    "features": [],
+                };
 
-            $.get({
-                url: "{{ route('resultFakultas') }}",
-                success: function(data) {
-                    $.each(data, function(index, value) {
-                        areaFakultas.features.push(
-                            {
-                                "type": "Feature",
-                                "geometry": JSON.parse(value['area']),
-                                "properties": {
-                                    "idFakultas": value['id_fakultas'],
-                                    "namaFakultas": value['letak_sebaran']
-                                },
-                                "id": value['id']
-                            }
-                        )
-                    })
-                }
-            });
+                areaFakultas = {
+                    "type": "FeatureCollection",
+                    "features": [],
+                };
 
-            $.get({
-                url: "{{ route('resultJurusan') }}",
-                success: function(data) {
-                    $.each(data, function(index, value) {
-                        areaJurusan.features.push(
-                            {
-                                "type": "Feature",
-                                "geometry": JSON.parse(value['area']),
-                                "properties": {
-                                    "idFakultas": value['id_fakultas'],
-                                    "namaJurusan": value['nama_jurusan']
-                                },
-                                "id": value['id']
-                            }
-                        )
-                    })
-                }
-            });
+                areaJurusan = {
+                    "type": "FeatureCollection",
+                    "features": [],
+                };
 
-            $.get({
-                url: "{{ route('resultGedung') }}",
-                success: function(data) {
-                    $.each(data, function(index, value) {
-                        areaGedung.features.push(
-                            {
-                                "type": "Feature",
-                                "geometry": JSON.parse(value['area']),
-                                "properties": {
-                                    "namaGedung": value['nama_gedung']
-                                },
-                                "id": value['id']
-                            }
-                        )
-                    })
-                }
-            });
+                areaGedung = {
+                    "type": "FeatureCollection",
+                    "features": [],
+                };
 
-            $.get({
-                url: "{{ route('resultProdi') }}",
-                async: "false",
-                success: function(data) {
-                    $.each(data, function(index, value) {
-                        pointProdi.features.push(
-                            {
-                                "type": "Feature",
-                                "geometry": JSON.parse(value['area']),
-                                "properties": {
-                                    "namaProdi": value['nama_prodi']
-                                },
-                                "id": value['id']
-                            }
-                        )
-                    })
-                }
-            });
+                pointProdi = {
+                    "type": "FeatureCollection",
+                    "features": [],
+                };
 
-            $.get({
-                url: "{{ route('centerGedung') }}",
-                success: function(data) {
-                    $.each(data, function(index, value) {
-                        centerGedung.point.push(
-                            [
-                                value['yValue'], value['xValue']
-                            ]
-                        )
-                    })
-                }
-            });
+                centerGedung = {
+                    "point": []
+                };
+            }
+
+            function reset(){
+                resetArea();
+
+                $.get({
+                    url: "{{ route('resultKampus') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaKampus.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "wilayah": value['nama_wilayah']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultFakultas') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaFakultas.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "idFakultas": value['id_fakultas'],
+                                        "namaFakultas": value['letak_sebaran']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultJurusan') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaJurusan.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "idFakultas": value['id_fakultas'],
+                                        "namaJurusan": value['nama_jurusan']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultGedung') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaGedung.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "namaGedung": value['nama_gedung']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultProdi') }}",
+                    async: "false",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            pointProdi.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "namaProdi": value['nama_prodi']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('centerGedung') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            centerGedung.point.push(
+                                [
+                                    value['yValue'], value['xValue']
+                                ]
+                            )
+                        })
+                    }
+                });
+            }
+
+            reset();
         </script>
         <script src="{{ asset('argon') }}/js/script.js"></script>
         <script>
             buildMap();
 
-            $("#fakultas").click(function(event) {
-                areaFakultas = {
-                    "type": "FeatureCollection",
-                    "features": [],
-                };
-                $.get({
-                    url: "{{ route('resultFakultass') }}",
+            function filterKampus(id){
+                resetArea();
+                
+                $.post({
+                    url: "{{ route('resultKampusFilter') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaKampus.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "wilayah": value['nama_wilayah']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                        map.remove();
+                        buildMap();
+                    }
+                });
+            }
+
+            function filterFakultas(id){
+                resetArea();
+                
+                $.post({
+                    url: "{{ route('resultFakultasFilter') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
                     success: function(data) {
                         $.each(data, function(index, value) {
                             areaFakultas.features.push(
@@ -207,7 +272,98 @@
                         buildMap();
                     }
                 });
-            });
+            }
+
+            function filterJurusan(id){
+                resetArea();
+                
+                $.post({
+                    url: "{{ route('resultJurusanFilter') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaJurusan.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "idFakultas": value['id_fakultas'],
+                                        "namaJurusan": value['nama_jurusan']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                        map.remove();
+                        buildMap();
+                    }
+                });
+            }
+
+            function filterProdi(id){
+                resetArea();
+                
+                $.post({
+                    url: "{{ route('resultProdiFilter') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            pointProdi.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "namaProdi": value['nama_prodi']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                        map.remove();
+                        buildMap();
+                    }
+                });
+            }
+
+            function filterGedung(id){
+                resetArea();
+                
+                $.post({
+                    url: "{{ route('resultGedungFilter') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaGedung.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "namaGedung": value['nama_gedung']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                        map.remove();
+                        buildMap();
+                    }
+                });
+            }
+
+            function filterReset(){
+                reset();
+                map.remove();
+                buildMap();
+            }
         </script>
     </body>
 </html>

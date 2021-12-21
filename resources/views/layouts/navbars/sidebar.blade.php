@@ -21,7 +21,7 @@
             <div class="navbar-collapse-header d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ url('') }}">
                             <img src="{{ asset('argon') }}/img/brand/unesamap.png">
                         </a>
                     </div>
@@ -44,7 +44,7 @@
                         <ul class="nav nav-sm flex-column">
                             @foreach($kampus as $item)
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="#" onclick="filterKampus({{ $item->id }});">
                                     {{ $item->nama_wilayah }}
                                 </a>
                             </li>
@@ -60,7 +60,7 @@
                         <ul class="nav nav-sm flex-column">
                             @foreach($fakultas as $item)
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="#" onclick="filterFakultas({{ $item->id }});">
                                     {{ $item->letak_sebaran }}
                                 </a>
                             </li>
@@ -76,7 +76,7 @@
                         <ul class="nav nav-sm flex-column">
                             @foreach($jurusan as $item)
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="#" onclick="filterJurusan({{ $item->id }});">
                                     {{ $item->nama_jurusan }}
                                 </a>
                             </li>
@@ -92,7 +92,7 @@
                         <ul class="nav nav-sm flex-column">
                             @foreach($prodi as $item)
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="#" onclick="filterProdi({{ $item->id }});">
                                     {{ $item->nama_prodi }}
                                 </a>
                             </li>
@@ -108,13 +108,18 @@
                         <ul class="nav nav-sm flex-column">
                             @foreach($gedung as $item)
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="#" onclick="filterGedung({{ $item->id }});">
                                     {{ $item->nama_gedung }}
                                 </a>
                             </li>
                             @endforeach
                         </ul>
                     </div>
+                </li>
+                <li class="nav-item m-4 bg-danger">
+                    <a class="nav-link text-white text-center d-block" href="#" onclick="filterReset();">
+                        Reset
+                    </a>
                 </li>
             </ul>
         </div>

@@ -18,25 +18,13 @@ use App\Http\Controllers\MapController;
 Route::get('/', [MapController::class, 'index'])->name('index');
 
 Route::get('/resultKampus', [MapController::class, 'resultKampus'])->name('resultKampus');
+Route::post('/resultKampusFilter', [MapController::class, 'resultKampusFilter'])->name('resultKampusFilter');
 Route::get('/resultFakultas', [MapController::class, 'resultFakultas'])->name('resultFakultas');
-Route::get('/resultFakultass', [MapController::class, 'resultFakultass'])->name('resultFakultass');
+Route::post('/resultFakultasFilter', [MapController::class, 'resultFakultasFilter'])->name('resultFakultasFilter');
 Route::get('/resultJurusan', [MapController::class, 'resultJurusan'])->name('resultJurusan');
+Route::post('/resultJurusanFilter', [MapController::class, 'resultJurusanFilter'])->name('resultJurusanFilter');
 Route::get('/resultGedung', [MapController::class, 'resultGedung'])->name('resultGedung');
+Route::post('/resultGedungFilter', [MapController::class, 'resultGedungFilter'])->name('resultGedungFilter');
 Route::get('/resultProdi', [MapController::class, 'resultProdi'])->name('resultProdi');
+Route::post('/resultProdiFilter', [MapController::class, 'resultProdiFilter'])->name('resultProdiFilter');
 Route::get('/centerGedung', [MapController::class, 'centerGedung'])->name('centerGedung');
-
-Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-	Route::get('upgrade', function () {return view('pages.upgrade');})->name('upgrade'); 
-	 Route::get('map', function () {return view('pages.maps');})->name('map');
-	 Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
-	 Route::get('table-list', function () {return view('pages.tables');})->name('table');
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
-});
-

@@ -19,8 +19,8 @@ function buildMap(){
             var satellite = L.tileLayer(mbUrl, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
             
             map = L.map('map', {
-                center: [-7.314211, 112.726701],
-                zoom: 17,
+                center: [-7.30950 , 112.69711],
+                zoom: 15,
                 layers: [streets,kampus,fakultas,jurusan,gedung,prodi] // ini menu yang tampil pertama kali
             });
             
