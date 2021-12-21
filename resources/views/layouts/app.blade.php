@@ -23,12 +23,7 @@
         <link type="text/css" href="{{ asset('argon') }}/css/style.css" rel="stylesheet">
     </head>
     <body class="{{ $class ?? '' }}">
-        @auth()
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-            @include('layouts.navbars.sidebar')
-        @endauth
+        @include('layouts.navbars.sidebar')
         
         <div class="main-content">
             @include('layouts.navbars.navbar')
@@ -86,7 +81,6 @@
                                 "type": "Feature",
                                 "geometry": JSON.parse(value['area']),
                                 "properties": {
-                                    "popupContent": "This is a free bus line that will take you across downtown.",
                                     "wilayah": value['nama_wilayah']
                                 },
                                 "id": value['id']
@@ -105,7 +99,6 @@
                                 "type": "Feature",
                                 "geometry": JSON.parse(value['area']),
                                 "properties": {
-                                    "popupContent": "This is a free bus line that will take you across downtown.",
                                     "idFakultas": value['id_fakultas'],
                                     "namaFakultas": value['letak_sebaran']
                                 },
@@ -125,7 +118,6 @@
                                 "type": "Feature",
                                 "geometry": JSON.parse(value['area']),
                                 "properties": {
-                                    "popupContent": "This is a free bus line that will take you across downtown.",
                                     "idFakultas": value['id_fakultas'],
                                     "namaJurusan": value['nama_jurusan']
                                 },
@@ -145,7 +137,6 @@
                                 "type": "Feature",
                                 "geometry": JSON.parse(value['area']),
                                 "properties": {
-                                    "popupContent": "This is a free bus line that will take you across downtown.",
                                     "namaGedung": value['nama_gedung']
                                 },
                                 "id": value['id']
@@ -165,7 +156,6 @@
                                 "type": "Feature",
                                 "geometry": JSON.parse(value['area']),
                                 "properties": {
-                                    "popupContent": "This is a free bus line that will take you across downtown.",
                                     "namaProdi": value['nama_prodi']
                                 },
                                 "id": value['id']
