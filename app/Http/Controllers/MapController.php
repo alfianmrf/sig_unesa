@@ -101,12 +101,6 @@ class MapController extends Controller
         return $data;
     }
 
-    public function resultGedungFilter(Request $request)
-    {
-        $data = Gedung::select('*', $this->stAsGeoJsonLatLng())->where('id', $request->id)->get();
-        return $data;
-    }
-
     public function resultProdi()
     {
         $data = Prodi::select('*', $this->stAsGeoJsonLatLng())->get();

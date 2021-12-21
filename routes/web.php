@@ -24,7 +24,6 @@ Route::post('/resultFakultasFilter', [MapController::class, 'resultFakultasFilte
 Route::get('/resultJurusan', [MapController::class, 'resultJurusan'])->name('resultJurusan');
 Route::post('/resultJurusanFilter', [MapController::class, 'resultJurusanFilter'])->name('resultJurusanFilter');
 Route::get('/resultGedung', [MapController::class, 'resultGedung'])->name('resultGedung');
-Route::post('/resultGedungFilter', [MapController::class, 'resultGedungFilter'])->name('resultGedungFilter');
 Route::get('/resultProdi', [MapController::class, 'resultProdi'])->name('resultProdi');
 Route::post('/resultProdiFilter', [MapController::class, 'resultProdiFilter'])->name('resultProdiFilter');
 Route::post('/centerGedung', [MapController::class, 'centerGedung'])->name('centerGedung');

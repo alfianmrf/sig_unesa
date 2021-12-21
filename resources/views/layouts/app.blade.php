@@ -228,10 +228,46 @@
                         })
                     }
                 });
+
+                $.get({
+                    url: "{{ route('resultGedung') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaGedung.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "namaGedung": value['nama_gedung']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
             }
 
             function filterFakultas(id){
                 resetArea();
+
+                $.get({
+                    url: "{{ route('resultKampus') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaKampus.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "wilayah": value['nama_wilayah']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
                 
                 $.post({
                     url: "{{ route('resultFakultasFilter') }}",
@@ -274,10 +310,65 @@
                         })
                     }
                 });
+
+                $.get({
+                    url: "{{ route('resultGedung') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaGedung.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "namaGedung": value['nama_gedung']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
             }
 
             function filterJurusan(id){
                 resetArea();
+
+                $.get({
+                    url: "{{ route('resultKampus') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaKampus.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "wilayah": value['nama_wilayah']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultFakultas') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaFakultas.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "idFakultas": value['id_fakultas'],
+                                        "namaFakultas": value['letak_sebaran']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
                 
                 $.post({
                     url: "{{ route('resultJurusanFilter') }}",
@@ -320,10 +411,84 @@
                         })
                     }
                 });
+
+                $.get({
+                    url: "{{ route('resultGedung') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaGedung.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "namaGedung": value['nama_gedung']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
             }
 
             function filterProdi(id){
                 resetArea();
+
+                $.get({
+                    url: "{{ route('resultKampus') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaKampus.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "wilayah": value['nama_wilayah']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultFakultas') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaFakultas.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "idFakultas": value['id_fakultas'],
+                                        "namaFakultas": value['letak_sebaran']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultJurusan') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaJurusan.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "idFakultas": value['id_fakultas'],
+                                        "namaJurusan": value['nama_jurusan']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
                 
                 $.post({
                     url: "{{ route('resultProdiFilter') }}",
@@ -348,17 +513,87 @@
                         buildMap();
                     }
                 });
+
+                $.get({
+                    url: "{{ route('resultGedung') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaGedung.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "namaGedung": value['nama_gedung']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
             }
 
             function filterGedung(id){
                 resetArea();
-                
-                $.post({
-                    url: "{{ route('resultGedungFilter') }}",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "id": id
-                    },
+
+                $.get({
+                    url: "{{ route('resultKampus') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaKampus.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "wilayah": value['nama_wilayah']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultFakultas') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaFakultas.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "idFakultas": value['id_fakultas'],
+                                        "namaFakultas": value['letak_sebaran']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultJurusan') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaJurusan.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "idFakultas": value['id_fakultas'],
+                                        "namaJurusan": value['nama_jurusan']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                    }
+                });
+
+                $.get({
+                    url: "{{ route('resultGedung') }}",
                     success: function(data) {
                         $.each(data, function(index, value) {
                             areaGedung.features.push(
