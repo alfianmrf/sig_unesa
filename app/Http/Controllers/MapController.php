@@ -13,6 +13,22 @@ use Illuminate\Support\Facades\DB;
 
 class MapController extends Controller
 {
+    public function index(){
+        $idKampus = Kampus::where('nama_kampus', 'Universitas Negeri Surabaya')->first();
+        $kampus = WilayahKampus::select('*', $this->stAsGeoJsonLatLng())->where('id_kampus', $idKampus->id)->get();
+        $fakultas = SebaranFakultas::select('*', $this->stAsGeoJsonLatLng())->get();
+        $jurusan = Jurusan::select('*', $this->stAsGeoJsonLatLng())->get();
+        $gedung = Gedung::select('*', $this->stAsGeoJsonLatLng())->get();
+        $prodi = Prodi::select('*', $this->stAsGeoJsonLatLng())->get();
+
+        return view('welcome')
+            ->with('kampus', $kampus)
+            ->with('fakultas', $fakultas)
+            ->with('jurusan', $jurusan)
+            ->with('gedung', $gedung)
+            ->with('prodi', $prodi);
+    }
+
     public static function stAsGeoJsonLatLng(){
         return DB::raw('st_asgeojson(latlng) as area');
     }
@@ -33,6 +49,12 @@ class MapController extends Controller
     public function resultFakultas()
     {
         $data = SebaranFakultas::select('*', $this->stAsGeoJsonLatLng())->get();
+        return $data;
+    }
+
+    public function resultFakultass()
+    {
+        $data = SebaranFakultas::select('*', $this->stAsGeoJsonLatLng())->where('id', 2)->get();
         return $data;
     }
 

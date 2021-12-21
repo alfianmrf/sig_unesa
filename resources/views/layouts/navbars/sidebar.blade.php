@@ -11,40 +11,8 @@
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="media align-items-center">
-                        <span class="avatar avatar-sm rounded-circle">
-                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg">
-                        </span>
-                    </div>
+                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">         
                 </a>
-                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                    <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
-                    </div>
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
-                        <i class="ni ni-single-02"></i>
-                        <span>{{ __('My profile') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-settings-gear-65"></i>
-                        <span>{{ __('Settings') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-calendar-grid-58"></i>
-                        <span>{{ __('Activity') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-support-16"></i>
-                        <span>{{ __('Support') }}</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                        <i class="ni ni-user-run"></i>
-                        <span>{{ __('Logout') }}</span>
-                    </a>
-                </div>
             </li>
         </ul>
         <!-- Collapse -->
@@ -54,7 +22,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('argon') }}/img/brand/blue.png">
+                            <img src="{{ asset('argon') }}/img/brand/unesamap.png">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -65,88 +33,88 @@
                     </div>
                 </div>
             </div>
-            <!-- Form -->
-            <form class="mt-4 mb-3 d-md-none">
-                <div class="input-group input-group-rounded input-group-merge">
-                    <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="{{ __('Search') }}" aria-label="Search">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <span class="fa fa-search"></span>
-                        </div>
-                    </div>
-                </div>
-            </form>
             <!-- Navigation -->
+            <h2>Filter</h2>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                    <a class="nav-link" href="#navbar-kampus" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-kampus">
+                        <i class="ni ni-hat-3 text-primary"></i> {{ __('Kampus') }}
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Laravel Examples') }}</span>
-                    </a>
-
-                    <div class="collapse show" id="navbar-examples">
+                    <div class="collapse" id="navbar-kampus">
                         <ul class="nav nav-sm flex-column">
+                            @foreach($kampus as $item)
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
-                                    {{ __('User profile') }}
+                                <a class="nav-link" href="#">
+                                    {{ $item->nama_wilayah }}
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
-                                    {{ __('User Management') }}
-                                </a>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('icons') }}">
-                        <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}
+                    <a class="nav-link" href="#navbar-fakultas" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-fakultas">
+                        <i class="ni ni-hat-3 text-success"></i> {{ __('Fakultas') }}
                     </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('map') }}">
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Maps') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('table') }}">
-                      <i class="ni ni-bullet-list-67 text-default"></i>
-                      <span class="nav-link-text">Tables</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Register') }}
-                    </a>
-                </li>
-            </ul>
-            <!-- Divider -->
-            <hr class="my-3">
-            <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Documentation</h6>
-            <!-- Navigation -->
-            <ul class="navbar-nav mb-md-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/getting-started/overview.html">
-                        <i class="ni ni-spaceship"></i> Getting started
-                    </a>
+                    <div class="collapse" id="navbar-fakultas">
+                        <ul class="nav nav-sm flex-column">
+                            @foreach($fakultas as $item)
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ $item->letak_sebaran }}
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/foundation/colors.html">
-                        <i class="ni ni-palette"></i> Foundation
+                    <a class="nav-link" href="#navbar-jurusan" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-jurusan">
+                        <i class="ni ni-hat-3 text-warning"></i> {{ __('Jurusan') }}
                     </a>
+                    <div class="collapse" id="navbar-jurusan">
+                        <ul class="nav nav-sm flex-column">
+                            @foreach($jurusan as $item)
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ $item->nama_jurusan }}
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/components/alerts.html">
-                        <i class="ni ni-ui-04"></i> Components
+                    <a class="nav-link" href="#navbar-prodi" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-prodi">
+                        <i class="ni ni-hat-3 text-info"></i> {{ __('Prodi') }}
                     </a>
+                    <div class="collapse" id="navbar-prodi">
+                        <ul class="nav nav-sm flex-column">
+                            @foreach($prodi as $item)
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ $item->nama_prodi }}
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#navbar-gedung" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-gedung">
+                        <i class="ni ni-hat-3 text-default"></i> {{ __('Gedung') }}
+                    </a>
+                    <div class="collapse" id="navbar-gedung">
+                        <ul class="nav nav-sm flex-column">
+                            @foreach($gedung as $item)
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    {{ $item->nama_gedung }}
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>

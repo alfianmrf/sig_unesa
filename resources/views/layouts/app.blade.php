@@ -179,5 +179,35 @@
             });
         </script>
         <script src="{{ asset('argon') }}/js/script.js"></script>
+        <script>
+            buildMap();
+
+            $("#fakultas").click(function(event) {
+                areaFakultas = {
+                    "type": "FeatureCollection",
+                    "features": [],
+                };
+                $.get({
+                    url: "{{ route('resultFakultass') }}",
+                    success: function(data) {
+                        $.each(data, function(index, value) {
+                            areaFakultas.features.push(
+                                {
+                                    "type": "Feature",
+                                    "geometry": JSON.parse(value['area']),
+                                    "properties": {
+                                        "idFakultas": value['id_fakultas'],
+                                        "namaFakultas": value['letak_sebaran']
+                                    },
+                                    "id": value['id']
+                                }
+                            )
+                        })
+                        map.remove();
+                        buildMap();
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

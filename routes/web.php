@@ -15,12 +15,11 @@ use App\Http\Controllers\MapController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MapController::class, 'index'])->name('index');
 
 Route::get('/resultKampus', [MapController::class, 'resultKampus'])->name('resultKampus');
 Route::get('/resultFakultas', [MapController::class, 'resultFakultas'])->name('resultFakultas');
+Route::get('/resultFakultass', [MapController::class, 'resultFakultass'])->name('resultFakultass');
 Route::get('/resultJurusan', [MapController::class, 'resultJurusan'])->name('resultJurusan');
 Route::get('/resultGedung', [MapController::class, 'resultGedung'])->name('resultGedung');
 Route::get('/resultProdi', [MapController::class, 'resultProdi'])->name('resultProdi');
